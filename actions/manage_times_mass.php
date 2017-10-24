@@ -87,7 +87,31 @@ if(strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
         // }
 
 
-        if($point_index != 0 && $schedule_points[$point_index] != $schedule_points[$point_index - 1]) {
+        if($point_index != 0 && $schedule_points[$point_index] == $schedule_points[$point_index - 1]) {
+
+          db_execute(
+            "UPDATE point_in_day 
+            SET 
+              departure_hour = ?, 
+              departure_minute = ?
+            WHERE bus_id = ?
+            AND arrival_hour = ?
+            AND arrival_minute = ? 
+            AND point_id = ?
+            AND group_id = ?", 
+
+            array(
+              $parsed_time['hour'], 
+              $parsed_time['min'], 
+              $bus['id'], 
+              $last_time['hour'], 
+              $last_time['min'], 
+              $schedule_points[$point_index],
+              $current_group_id
+            )
+          );
+
+        } else {
 
           db_insert('point_in_day', array(
             'day' => $sd,
@@ -102,33 +126,12 @@ if(strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
             'group_id' => $current_group_id
           ));
 
-        } else {
-
-          db_execute(
-            "UPDATE point_in_day 
-            SET 
-              departure_hour = ?, 
-              departure_minute = ?
-            WHERE bus_id = ?
-            AND arrival_hour = ?
-            AND arrival_minute = ? 
-            AND group_id = ?", 
-
-            array(
-              $parsed_time['hour'], 
-              $parsed_time['min'], 
-              $bus['id'], 
-              $last_time['hour'], 
-              $last_time['min'], 
-              $current_group_id
-            )
-          );
         }
 
         $last_time = $parsed_time;
       }
+      $current_group_id ++;
     }
-    $current_group_id ++;
   }
 
 

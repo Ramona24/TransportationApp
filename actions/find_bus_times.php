@@ -25,7 +25,7 @@ $points_in_day = db_query(
     LEFT JOIN busses
       ON point_in_day.bus_id = busses.id
     WHERE busses.number = ? 
-    ORDER BY group_id, hour, minute",
+    ORDER BY group_id, arrival_hour, arrival_minute",
     array($bus_number)
 );
 

@@ -23,7 +23,7 @@
         <?php foreach($blank_points as $bp): ?>
         <div class="form-group">
             <label for="bus_number">Point <?php echo $bp ?></label>
-            <select name="schedule_points[]" class="form-control">
+            <select name="schedule_points[<?php echo $bp ?>]" class="form-control">
             <?php foreach($points as $p): ?>
                 <option 
                     value="<?php echo $p['id'] ?>" 
