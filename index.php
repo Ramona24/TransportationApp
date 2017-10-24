@@ -36,12 +36,12 @@ function db_get($table_name, $id) {
 }
 
 
-function db_execute($sql) {
+function db_execute($sql, $params=array()) {
     global $db;
     
     try {
         $stmt = $db->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($params);
     } catch (PDOException $e){
         error_log($e->getMessage().', SQL '.$sql);
     }
@@ -88,19 +88,27 @@ function db_update($table_name, $record_id, $data, $id_col = 'id') {
 
     $set_val_str = implode(', ', $set_values);
 
-    // try {
-    //     $sql = "UPDATE $table_name SET $set_val_str WHERE $id_col = '$record_id'";
-    //     $stmt = $db->prepare($sql);
-    //     $stmt->execute($values);
-    // } catch (PDOException $e){
-    //     error_log($e->getMessage().', SQL '.$sql);
-    // }
-
     db_execute("UPDATE $table_name SET $set_val_str WHERE $id_col = '$record_id'");
 
     return $db->lastInsertId();
 }
 
+
+function guid(){
+    if (function_exists('com_create_guid')) {
+        return com_create_guid();
+    } else {
+        mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
+        $charid = strtoupper(md5(uniqid(rand(), true)));
+        $hyphen = chr(45);// "-"
+        $uuid = substr($charid, 0, 8).$hyphen
+                .substr($charid, 8, 4).$hyphen
+                .substr($charid,12, 4).$hyphen
+                .substr($charid,16, 4).$hyphen
+                .substr($charid,20,12);// "}"
+        return $uuid;
+    }
+}
 
 
 if(!isset($_GET['a'])) {

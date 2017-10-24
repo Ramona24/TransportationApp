@@ -8,7 +8,8 @@ $days = array(
   'Thursday', 
   'Friday', 
   'Saturday', 
-  'Sunday'
+  'Sunday',
+  'Public Holidays'
 );
 
 if(strtolower($_SERVER['REQUEST_METHOD']) == 'get') {
@@ -16,6 +17,8 @@ if(strtolower($_SERVER['REQUEST_METHOD']) == 'get') {
 } else {
   $bus_number = isset($_POST['bus_number']) ? $_POST['bus_number'] : '';
 }
+
+$display_bus_times_list = $bus_number != "";
 
 //echo $bus_number;
 

@@ -3,7 +3,7 @@
 
 <div class="">
 
-    <h2 class="page-header">Bus Times</h2>
+    <h2 class="page-header <?php echo $display_bus_times_list ? '' : 'front-page' ?>">Bus Times</h2>
 
     <form class="" role="form" action="index.php" method="GET">
         <input type="hidden" name="a" value="find_bus_times" />
@@ -41,6 +41,9 @@
             <li class="nav-item">
                 <a class="nav-link " data-toggle="tab" href="#sunday">Sun</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link " data-toggle="tab" href="#public_holidays">Public Holidays</a>
+            </li>
         </ul>
 
         <div class="tab-content" style="">
@@ -58,7 +61,12 @@
                             <?php if(strtolower($point['day']) == strtolower($day)): ?>
                             <tr>
                                 <td><?php echo $point['description'] ?></td>
-                                <th scope="row"><?php echo $point['hour'] ?>:<?php echo str_pad($point['minute'], 2, "0", STR_PAD_LEFT) ?></th>
+                                <th scope="row">
+                                    <?php echo $point['arrival_hour'] ?>:<?php echo str_pad($point['arrival_minute'], 2, "0", STR_PAD_LEFT) ?>
+                                    <?php if($point['arrival_hour'] != $point['departure_hour'] || $point['arrival_minute'] != $point['departure_minute']): ?>
+                                        - <?php echo $point['departure_hour'] ?>:<?php echo str_pad($point['departure_minute'], 2, "0", STR_PAD_LEFT) ?>
+                                    <?php endif; ?>
+                                </th>
                             </tr>
                             <?php endif ?>
                             <?php endforeach; ?>

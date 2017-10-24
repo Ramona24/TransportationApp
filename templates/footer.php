@@ -7,8 +7,12 @@
 
 <style type="text/css">
     h2.page-header {
-        margin-top: 50px;
+        margin-top: 20px;
         margin-bottom: 50px;
+    }
+
+    h2.page-header.front-page {
+        margin-top: 100px;
     }
 
     body {
@@ -22,6 +26,7 @@
     #bus-times .table th {
         border-top: 0px;
     }
+
 
 
     /*!

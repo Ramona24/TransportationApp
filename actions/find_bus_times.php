@@ -8,12 +8,14 @@ $days = array(
     'Thursday', 
     'Friday', 
     'Saturday', 
-    'Sunday'
+    'Sunday',
+    'Public Holidays'
 );
 
 $bus_number = isset($_GET['bus_number']) ? $_GET['bus_number'] : '';
 //echo $bus_number;
 
+$display_bus_times_list = $bus_number != "";
 
 $points_in_day = db_query(
    "SELECT * 
@@ -23,7 +25,7 @@ $points_in_day = db_query(
     LEFT JOIN busses
       ON point_in_day.bus_id = busses.id
     WHERE busses.number = ? 
-    ORDER BY hour, minute",
+    ORDER BY group_id, hour, minute",
     array($bus_number)
 );
 

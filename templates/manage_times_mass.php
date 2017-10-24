@@ -3,18 +3,45 @@
 
 <div class="col-sm-9">
 
-    <h2 class="page-header">Bus Times (admin)</h2>
+    <!-- <h2 class="page-header">Bus Times (admin)</h2> -->
 
-    <form class="" role="form" action="index.php" method="GET">
-        <input type="hidden" name="a" value="manage_times" />
+    <form class="" role="form" action="index.php?a=manage_times_mass" method="POST">
+        <input type="hidden" name="a" value="manage_times_mass" />
         
         <div class="form-group">
             <label for="bus_number">Bus Number</label>
             <input type="text" name="bus_number" value="<?php echo $bus_number ?>" class="form-control" id="bus_number" aria-describedby="busNumber" placeholder="Enter Bus Number" />
-            <small id="emailHelp" class="form-text text-muted">Let us help you stay on time.</small>
         </div>
 
-        <button type="submit" class="btn btn-primary animated tada _infinite">Find Times</button>
+        <?php foreach($days as $d): ?>
+        <div class="form-group">
+            <input type="checkbox" name="schedule_days[]" value="<?php echo $d ?>" />
+            <label for="schedule"><?php echo $d ?></label>
+        </div>
+        <?php endforeach; ?>
+
+        <?php foreach($blank_points as $bp): ?>
+        <div class="form-group">
+            <label for="bus_number">Point <?php echo $bp ?></label>
+            <select name="schedule_points[]" class="form-control">
+            <?php foreach($points as $p): ?>
+                <option 
+                    value="<?php echo $p['id'] ?>" 
+                    <?php echo (isset($_POST['schedule_points'][$bp]) && $_POST['schedule_points'][$bp] == $p['id']) ? 'selected' : ''?> >
+                    <?php echo $p['description'] ?>
+                </option>
+            <?php endforeach; ?>
+            </select>
+        </div>
+        <?php endforeach; ?>
+
+        <div class="form-group">
+            <label for="schedule">Schedule</label>
+            <textarea name="schedule" value="" class="form-control" id="schedule" aria-describedby="schedule" placeholder="Paste Schedule"></textarea>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary animated tada _infinite">Reset Times</button>
     </form>
 
 
@@ -114,7 +141,13 @@
 </div>
 
 
+<style type="text/css">
 
+    textarea[name=schedule] { 
+        height: 300px;
+    }
+
+</style>
 
 
 
