@@ -115,5 +115,11 @@ if(!isset($_GET['a'])) {
     $_GET['a'] = 'find_bus_times';
 }
 
+$page_name = $_GET['a'];
+$uses_template = $_GET['a'].'.php';
+
 require_once(APP_DIR.'/actions/'.$_GET['a'].'.php');
-require_once(APP_DIR.'/templates/'.$_GET['a'].'.php');
+
+if($uses_template) {
+    require_once(APP_DIR.'/templates/'.$uses_template);
+}

@@ -5,5 +5,5 @@
 
 
 
-<body class="container">
+<body class="container" data-page-name="<?php echo $page_name ?>">
 

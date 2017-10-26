@@ -14,8 +14,26 @@
             <small id="emailHelp" class="form-text text-muted">Let us help you stay on time.</small>
         </div>
 
+        <div class="form-group animated fadeIn">
+            <div class="col-sm-2">
+                <label for="filter_by_point_id">Filter By Point</label>
+            </div>
+            <div class="col-sm-2">
+                <select name="filter_by_point_id" class="form-control" id="filter_by_point_id">
+                <?php foreach($points as $p): ?>
+                    <option 
+                        value="<?php echo $p['id'] ?>" 
+                        <?php echo (isset($_POST['schedule_points'][$bp]) && $_POST['schedule_points'][$bp] == $p['id']) ? 'selected' : ''?> >
+                        <?php echo $p['description'] ?>
+                    </option>
+                <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary <?php echo ($bus_number == '') ? 'animated tada' : '' ?> _infinite">Find Times</button>
     </form>
+
 
     <?php if($bus_number != ""): ?>
     <div id="bus-times" class="animated slideInUp">
