@@ -3,7 +3,7 @@
 define("APP_DIR", dirname(__FILE__));
 
 try {
-    $db = new PDO("mysql:dbname=bus_system;host=127.0.0.1", "root", "");
+     $db = new PDO("mysql:dbname=jusrambl_snart007;host=127.0.0.1", "jusrambl_dam24", "pepsi_cola24");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e){
     error_log($e->getMessage());
