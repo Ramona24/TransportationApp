@@ -34,7 +34,8 @@
     }
 
     #filter-points-loader {
-        /* height: 50px; */
+        height: 50px;
+        width: 50px;
     }
 
 

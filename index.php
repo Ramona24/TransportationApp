@@ -1,9 +1,10 @@
 <?php
 
 define("APP_DIR", dirname(__FILE__));
+require_once(APP_DIR.'/config.php');
 
 try {
-     $db = new PDO("mysql:dbname=jusrambl_snart007;host=127.0.0.1", "jusrambl_dam24", "pepsi_cola24");
+     $db = new PDO("mysql:dbname=".$CONFIG['db']['name'].";host=".$CONFIG['db']['host']."", $CONFIG['db']['username'], $CONFIG['db']['password']);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e){
     error_log($e->getMessage());
