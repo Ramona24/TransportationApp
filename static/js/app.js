@@ -17,8 +17,8 @@ var getUrlParameter = function getUrlParameter(sParam) {
 (function() {
 
     var updateFilterPointsElement = function(bus_number) {
-        $('#filter-points').fadeIn();
-        $('#filter-points').find('label,select').hide();
+        //$('#filter-points').fadeIn();
+        //$('#filter-points').find('label,select').hide();
         $('#filter-points-loader').show();
 
         $.getJSON('index.php?a=get_bus_points', {"bus_number": bus_number}, function(points) {
@@ -33,7 +33,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
             setTimeout(function() {
                 $('#filter-points-loader').fadeOut();
-                $('#filter-points').find('label,select').fadeIn();
+                //$('#filter-points').find('label,select').fadeIn();
             }, 1000)
         })
     }

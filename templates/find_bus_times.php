@@ -14,9 +14,12 @@
             <small id="emailHelp" class="form-text text-muted">Let us help you stay on time.</small>
         </div>
 
-        <div class="form-group animated fadeIn" id="filter-points" style="display:none">
-            <div id="filter-points-loader" class="loader" style="display:none"></div>
-            <label for="filter_by_point_id">Filter By Point</label>
+        <div class="form-group" id="filter-points" style="">
+            
+            <label for="filter_by_point_id">
+                Filter By Point
+                <div id="filter-points-loader" class="loader" style="display:none"></div>
+            </label>
             <select name="filter_by_point_id" class="form-control" id="filter_by_point_id">
             <?php foreach($points as $p): ?>
                 <option 
